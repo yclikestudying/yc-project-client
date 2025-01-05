@@ -1,0 +1,296 @@
+/* 修改容器样式 */
+.login-container {
+  min-height: 100vh;
+  width: 100%;
+  background: #f8f9fa;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 添加滚动容器样式 */
+.scroll-container {
+  flex: 1;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch; /* 增加 iOS 滚动流畅度 */
+  padding: 20px 0;
+}
+
+.content {
+  position: relative;
+  z-index: 1;
+  padding: 0 20px;
+  max-width: 420px;
+  margin: 0 auto;
+}
+
+/* 修改背景样式 */
+.background {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.circle {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(40px);
+}
+
+.circle1 {
+  width: 300px;
+  height: 300px;
+  background: linear-gradient(
+    135deg,
+    rgba(76, 175, 80, 0.15),
+    rgba(76, 175, 80, 0.05)
+  );
+  top: -150px;
+  right: -100px;
+  animation: float1 8s infinite;
+}
+
+.circle2 {
+  width: 200px;
+  height: 200px;
+  background: linear-gradient(
+    135deg,
+    rgba(25, 137, 250, 0.15),
+    rgba(25, 137, 250, 0.05)
+  );
+  bottom: -100px;
+  left: -50px;
+  animation: float2 6s infinite;
+}
+
+@keyframes float1 {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(30px, -30px);
+  }
+}
+
+@keyframes float2 {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(30px, -30px);
+  }
+}
+
+/* 头部样式 */
+.header {
+  text-align: center;
+  padding-top: 40px;
+  margin-bottom: 40px;
+}
+
+.logo {
+  margin-bottom: 16px;
+}
+
+.title {
+  color: var(--main-color);
+  font-size: 28px;
+  font-weight: bold;
+  margin: 0;
+}
+
+.subtitle {
+  color: #666;
+  font-size: 14px;
+  margin-top: 8px;
+}
+
+/* 标签切换 */
+.tabs {
+  display: flex;
+  background: #fff;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  position: relative;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+  overflow: hidden;
+}
+
+.tab {
+  flex: 1;
+  text-align: center;
+  padding: 14px 0;
+  font-size: 15px;
+  color: #666;
+  cursor: pointer;
+  transition: color 0.3s;
+  position: relative;
+  z-index: 1;
+}
+
+.tab.active {
+  color: black;
+}
+
+.tab-slider {
+  position: absolute;
+  width: 50%;
+  height: 100%;
+  background: var(--main-color);
+  border-radius: 8px;
+  transition: left 0.3s;
+  top: 0;
+}
+
+/* 表单容器 */
+.form-container {
+  background: #fff;
+  border-radius: 12px;
+  /* padding: 24px; */
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+  margin-bottom: 20px; /* 添加底部间距 */
+}
+
+/* 输入框组 */
+.input-group {
+  margin-bottom: 10px;
+}
+
+.input-group label {
+  display: block;
+  font-size: 14px;
+  color: #333;
+  margin-bottom: 8px;
+}
+
+.input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  border: 1px solid #e8e8e8;
+  border-radius: 8px;
+  transition: all 0.3s;
+  background: #fff;
+}
+
+.input-wrapper:focus-within {
+  border-color: var(--main-color);
+  box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.1);
+}
+
+.input-icon {
+  margin: 0 12px;
+}
+
+input {
+  flex: 1;
+  padding: 12px;
+  border: none;
+  outline: none;
+  font-size: 14px;
+  background: transparent;
+}
+
+.toggle-password {
+  padding: 0 12px;
+  cursor: pointer;
+}
+
+.error-message {
+  font-size: 12px;
+  color: #f56c6c;
+  margin-top: 4px;
+}
+
+/* 提交按钮 */
+.submit-btn {
+  margin-top: 24px;
+  width: 100%;
+  background-color: var(--main-color);
+}
+
+/* 其他登录方式 */
+.other-login {
+  margin-top: 24px;
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+  margin: 24px 0;
+  color: #999;
+}
+
+.divider::before,
+.divider::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: #eee;
+}
+
+.divider span {
+  padding: 0 12px;
+  font-size: 12px;
+}
+
+.social-icons {
+  display: flex;
+  justify-content: center;
+  gap: 32px;
+}
+
+.social-icon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  cursor: pointer;
+  transition: transform 0.3s;
+}
+
+.social-icon:hover {
+  transform: translateY(-2px);
+}
+
+.social-icon span {
+  font-size: 12px;
+  color: #666;
+}
+
+/* 响应式调整 */
+@media (max-width: 480px) {
+  .scroll-container {
+    padding: 10px 0;
+  }
+
+  .content {
+    padding: 0 16px;
+  }
+
+  .header {
+    padding-top: 30px;
+    margin-bottom: 30px;
+  }
+
+  .form-container {
+    padding: 5px 20px;
+  }
+
+  .title {
+    font-size: 24px;
+  }
+}
+
+/* 添加装饰容器样式 */
+.decorations {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  pointer-events: none;
+}

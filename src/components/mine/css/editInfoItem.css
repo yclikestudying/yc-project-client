@@ -1,0 +1,164 @@
+/* 用户名设置 */
+.editInfoItem > .content > .text {
+  box-sizing: border-box;
+  width: 90%;
+  height: 50px;
+  margin: 10px auto;
+  padding-left: 10px;
+  display: flex;
+  align-items: center;
+  border-radius: 10px;
+  background-color: #fbfbfb;
+  border: 1px solid var(--main-color);
+}
+.editInfoItem > .content > .text > .input {
+  width: 100%;
+  background-color: #fbfbfb;
+  border: none;
+  caret-color: var(--main-color);
+}
+.editInfoItem > .content > .text > .input::placeholder {
+  opacity: 0.5;
+}
+.editInfoItem > .content > .prompt {
+  width: 90%;
+  margin: 10px auto;
+}
+.editInfoItem > .content > .prompt > span {
+  font-size: 13px;
+  opacity: 0.4;
+}
+
+/* 性别设置 */
+.editInfoItem > .content > .gender .gender-item {
+  box-sizing: border-box;
+  padding-left: 40%;
+  margin-top: 10px;
+  --van-radio-checked-icon-color: var(--main-color);
+}
+
+/* 生日设置 */
+.editInfoItem > .content > .show {
+  margin: 20px 0 20px 40px;
+}
+
+/* 简介设置 */
+.editInfoItem > .content > .profile {
+  box-sizing: border-box;
+  width: 90%;
+  margin: 10px auto;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  border-radius: 10px;
+  background-color: #fbfbfb;
+  overflow-x: hidden;
+  border: 1px solid var(--main-color);
+}
+.editInfoItem > .content > .profile > .textarea {
+  border: none;
+  background-color: #fbfbfb;
+  caret-color: var(--main-color);
+  opacity: 0.7;
+}
+.editInfoItem > .content > .profile > .textarea::placeholder {
+  opacity: 0.5;
+}
+
+/* 专业 */
+.editInfoItem > .content > .item {
+  display: flex;
+}
+.editInfoItem > .content > .item > .professional {
+  max-width: 30%;
+  max-height: 500px;
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+.editInfoItem > .content > .item > .professional > .van-sidebar {
+  --van-sidebar-selected-border-color: var(--main-color);
+  --van-sidebar-background: #F2F3F8;
+}
+.editInfoItem > .content > .item > .professional .professional-item {
+  position: absolute;
+  left: 30%;
+  top: 15%;
+  padding-right: 10px;
+  max-width: 65%;
+}
+.editInfoItem > .content > .item > .professional .professional-item > .van-tag {
+  margin-left: 10px;
+  background-color: #F2F3F8;
+  color: var(--text-color);
+}
+
+/* 专业被选中的状态 */
+.active {
+  background-color: var(--main-color) !important;
+}
+
+/* 个性标签设置 */
+.editInfoItem > .content > .header > .top {
+  box-sizing: border-box;
+  padding: 2px 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 20px;
+}
+.editInfoItem > .content > .header > .top > span:nth-child(1) {
+  font-weight: bold;
+}
+.editInfoItem > .content > .header > .top > span:nth-child(2) {
+  font-size: 13px;
+  opacity: 0.4;
+}
+.editInfoItem > .content > .header > .bottom {
+  box-sizing: border-box;
+  padding: 10px 5px;
+  border-bottom: 1px solid rgb(218, 218, 218);
+}
+.editInfoItem > .content > .header > .bottom > .van-tag {
+  margin: 5px;
+}
+.editInfoItem > .content > .header > .bottom > .van-tag {
+  background-color: var(--main-color);
+  color: var(--text-color);
+}
+.editInfoItem > .content > .main {
+  display: flex;
+  position: relative;
+}
+.editInfoItem > .content > .main > .professional {
+  max-width: 30%;
+  max-height: 400px;
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+.editInfoItem > .content > .main > .professional > .van-sidebar {
+  --van-sidebar-selected-border-color: var(--main-color);
+  --van-sidebar-background: #F2F3F8;
+}
+.editInfoItem > .content > .main > .professional .professional-item {
+  position: absolute;
+  left: 30%;
+  top: 15%;
+  padding-right: 10px;
+  max-width: 65%;
+}
+.editInfoItem > .content > .main > .professional .professional-item > .van-tag {
+  margin-left: 10px;
+  background-color: #F2F3F8;
+  color: var(--text-color);
+}
+
+/* 保存按钮 */
+.editInfoItem > .submit {
+  margin-top: 10px;
+  text-align: center;
+}
+.editInfoItem > .submit > .button {
+  background-color: var(--main-color);
+  color: var(--text-color);
+  border: none;
+}

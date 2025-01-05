@@ -1,0 +1,117 @@
+/* header */
+.header {
+    width: 100%;
+    height: 150px;
+    background: linear-gradient(
+      to top right,
+      white,
+      var(--main-color)
+    );
+    display: flex;
+    align-items: center;
+    padding-left: 30px;
+  }
+  
+  .header > .img {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    overflow: hidden;
+  }
+  
+  .header > .img > img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .header > .name {
+    margin-left: 20px;
+    width: 65%;
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .header > .name > .left {
+    display: flex;
+    align-items: center;
+  }
+  
+  .header > .name > .left > img {
+    width: 20px;
+    height: 20px;
+  }
+  
+  .header > .name > .right > img {
+    width: 20px;
+    height: 20px;
+  }
+  
+  /* function */
+  .function {
+    position: relative;
+    width: 90%;
+    height: 70px;
+    margin: 0 auto;
+    bottom: 30px;
+    border-radius: 10px;
+    background-color: white;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    border: 1px solid rgb(218, 218, 218);
+  }
+  
+  .function > .item {
+    display: flex;
+    height: 70%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+  }
+  
+  .function > .item > span {
+    font-size: 13px;
+  }
+  
+  .function > .item > span:nth-child(2) {
+    opacity: 0.7;
+  }
+  
+  /* setting */
+  .setting > .item {
+    box-sizing: border-box;
+    width: 90%;
+    height: 45px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .setting > .item > .left {
+    display: flex;
+    align-items: center;
+  }
+  
+  .setting > .item:nth-child(1) {
+    box-sizing: content-box;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgb(219, 218, 218);
+  }
+  
+  .setting > .item:nth-child(5) {
+    box-sizing: content-box;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgb(219, 218, 218);
+  }
+  
+  .setting > .item > .left > span {
+    margin-left: 10px;
+    font-size: 17px;
+  }
+  
+  .setting > .item img {
+    width: 20px;
+    height: 20px;
+  }

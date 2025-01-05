@@ -1,0 +1,133 @@
+.myIndex {
+  width: 100vw;
+  height: 100vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.header {
+  position: relative;
+  width: 100%;
+  height: 150px;
+}
+
+.header img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.header > div {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    top: 0;
+}
+
+.header > .back {
+    left: 5px;
+}
+
+.header > .more {
+    right: 5px;
+}
+
+.footer {
+  width: 100%;
+  height: calc(100vh + 50px);
+}
+
+.footer > .info {
+  position: relative;
+  width: 100%;
+  height: 50px;
+}
+
+.footer > .info > .left {
+  position: absolute;
+  bottom: 0;
+  left: 15px;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.footer > .info > .left > img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.footer > .info > .right {
+  position: absolute;
+  right: 10%;
+  top: 26%;
+  border: 1px solid black;
+  text-align: center;
+  border-radius: 50px;
+  padding: 2px 10px;
+}
+
+.footer > .info > .right > span {
+  font-size: 18px;
+}
+
+.footer > .content {
+  width: 100%;
+  height: 100vh;
+}
+
+.footer > .content > .tab {
+  margin-top: 5px;
+  padding-top: 5px;
+  width: 100%;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  border-top: 1px solid rgb(234, 232, 232);
+  border-bottom: 1px solid rgb(234, 232, 232);
+}
+
+.footer > .content > .tab > .item {
+  flex: 1;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.footer > .content > .tab > .item > span {
+  transition: all 0.2s;
+}
+
+.underline {
+  margin-top: 5px;
+  width: 20px;
+  height: 5px;
+  border-radius: 50px;
+  background-color: white;
+  transition: all 0.2s;
+}
+
+.footer > .content > .article {
+  width: 200vw;
+  height: calc(100vh - 40px);
+  display: flex;
+  transition: all 0.2s;
+}
+
+.footer > .content > .article > .page {
+  width: 100vw;
+  height: 100%;
+}
+
+.isDisplay {
+  background-color: var(--main-color);
+}
+
+.active {
+  font-weight: bold !important;
+}

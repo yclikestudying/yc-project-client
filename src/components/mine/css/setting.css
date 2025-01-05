@@ -1,0 +1,58 @@
+.setting {
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+
+.setting > .main > .gap {
+  height: 30px;
+  background-color: #f2f3f8;
+}
+
+.setting > .main > .content {
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.setting > .main > .content > .item {
+  box-sizing: border-box;
+  width: 90%;
+  height: 40px;
+  margin: 0 auto;
+  padding: 25px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgb(240, 238, 238);
+}
+
+.setting > .setting > .main > .content > .item > .left {
+  display: flex;
+  align-items: center;
+}
+
+.setting > .main > .content > .item > .right {
+  display: flex;
+  align-items: center;
+}
+
+.setting > .main > .content > .item > .right > img {
+  width: 20px;
+  height: 20px;
+}
+
+.setting > .logout > .gap {
+  height: 30px;
+  background-color: #f2f3f8;
+}
+
+.setting > .logout > .item {
+  box-sizing: border-box;
+  text-align: center;
+  padding: 10px 0;
+}
+
+.setting > .logout > .item > span {
+  width: 300px;
+}

@@ -1,0 +1,10 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* 隐藏滚动轴 */
+::-webkit-scrollbar {
+  display: none;
+}
