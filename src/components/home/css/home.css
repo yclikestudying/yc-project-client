@@ -1,6 +1,6 @@
 .home {
   width: 100%;
-  height: 92.5vh;
+  height: 100%;
 }
 
 /* 页面最上面背景 */
@@ -8,14 +8,69 @@
   width: 100%;
   height: 170px;
   background: linear-gradient(to right, rgb(179, 86, 5), rgb(236, 130, 38));
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.title > .item {
+  padding: 0 20px;
+  width: 100%;
+  height: 50px;
+  margin-bottom: 10px;
+}
+.title > .item > .item-box {
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  overflow: hidden;
+  display: flex;
+}
+.title > .item > .item-box > img {
+  width: 100%;
+  height: 100%;
+}
+.title > .item > .item-box > .left-img {
+  width: 50px;
+  height: 100%;
+  border-radius: 50%;
+  overflow: hidden;
+}
+.title > .item > .item-box > .left-img > img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.title > .item > .item-box > .right-content {
+  width: calc(100% - 50px);
+  height: 100%;
+  color: white;
+  padding: 0 5px;
+}
+.title > .item > .item-box > .right-content > .name {
+  width: 100%;
+  height: 60%;
+  display: flex;
+  align-items: center;
+  font-size: 18px;
+}
+.title > .item > .item-box > .right-content > .number {
+  width: 100%;
+  height: 40%;
+  display: flex;
+  align-items: center;
+  font-size: 12px;
+}
+.title > .item > .item-box > .right-content > .number > span {
+  margin-right: 5px;
 }
 
 /* 白色区域 */
 .content {
   position: relative;
-  bottom: 16px;
+  bottom: 20px;
   width: 100%;
-  height: calc(100% - 170px + 16px);
+  height: calc(100% - 170px + 190px);
   border-top-left-radius: 25px;
   border-top-right-radius: 25px;
   background-color: #fff;
@@ -91,12 +146,135 @@
   width: 300vw;
   height: 87vh;
   transition: all 0.2s;
+  overflow-y: scroll;
 }
 
 .content > .bottom .page {
   min-width: 100vw;
   height: 100%;
+}
+
+/* 内容 */
+.content > .bottom .page > .box {
+  padding: 10px 0;
+}
+.content > .bottom .page > .box > .message-box {
+  box-sizing: content-box;
+  width: 100%;
+  height: 50px;
+  display: flex;
+}
+.content > .bottom .page > .box > .message-box > .left {
+  width: 20%;
+  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+.content > .bottom .page > .box > .message-box > .left > .img {
+  width: 65%;
+  height: 95%;
+  border-radius: 50%;
+  overflow: hidden;
+}
+.content > .bottom .page > .box > .message-box > .left > .img > img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.content > .bottom .page > .box > .message-box > .right {
+  width: 80%;
+  height: 100%;
+  padding-right: 10px;
+  font-size: 13px;
+}
+.content > .bottom .page > .box > .message-box > .right > .top {
+  width: 100%;
+  height: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.content > .bottom .page > .box > .message-box > .right > .top > button {
+  box-sizing: content-box;
+  padding: 4px 10px;
+  border-radius: 50px;
+  border: none;
+  background-color: var(--main-color);
+}
+
+.content > .bottom .page > .box > .message-box > .right > .bottom {
+  width: 100%;
+  height: 50%;
+  display: flex;
+  align-items: center;
+  color: rgb(84, 83, 83);
+}
+.content > .bottom .page > .box > .message-box > .right > .bottom > span {
+  text-wrap: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.content > .bottom .page > .box > .text {
+  width: 100vw;
+  padding: 0 10px;
+  margin: 10px 0;
+}
+.content > .bottom .page > .box > .text > .text-box {
+  width: 100%;
+  height: auto;
+}
+.content > .bottom .page > .box > .img {
+  width: 100vw;
+  padding: 0 10px;
+  margin-bottom: 10px;
+}
+.content > .bottom .page > .box > .img > .img-box {
+  width: 100%;
+}
+.content > .bottom .page > .box > .img > .img-box > img {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+  margin-top: 5px;
+  margin-right: 5px;
+  border-radius: 10px;
+}
+.content > .bottom .page > .box > .function {
+  width: 100%;
+  display: flex;
+  padding: 0 10px;
+  align-items: center;
+}
+.content > .bottom .page > .box > .connect {
+  justify-content: space-between;
+}
+.content > .bottom .page > .box > .connect > .method > span {
+  color: orangered;
+  margin-right: 10px;
+}
+.content > .bottom .page > .box > .connect > .method > button {
+  font-size: 14px;
+  border: none;
+  background-color: var(--main-color);
+  border-radius: 10px;
+  padding: 2px 5px;
+}
+.content > .bottom .page > .box > .function > div {
+  margin-right: 10px;
+}
+
+/* 浮动气泡 */
+.bubble {
+  position: absolute;
+  bottom: 73px;
+  right: 27px;
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  background-color: var(--main-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
 }

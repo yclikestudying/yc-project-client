@@ -1,0 +1,110 @@
+/* 内容 */
+.box {
+  padding: 10px 0;
+}
+.box > .message-box {
+  box-sizing: content-box;
+  width: 100%;
+  height: 50px;
+  display: flex;
+}
+.box > .message-box > .left {
+  width: 20%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.box > .message-box > .left > .img {
+  width: 65%;
+  height: 95%;
+  border-radius: 50%;
+  overflow: hidden;
+}
+.box > .message-box > .left > .img > img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.box > .message-box > .right {
+  width: 80%;
+  height: 100%;
+  padding-right: 10px;
+  font-size: 13px;
+}
+.box > .message-box > .right > .top {
+  width: 100%;
+  height: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.box > .message-box > .right > .top > .delete {
+  width: 25px;
+  height: 25px;
+}
+.box > .message-box > .right > .top > .delete > img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.box > .message-box > .right > .bottom {
+  width: 100%;
+  height: 50%;
+  display: flex;
+  align-items: center;
+  color: rgb(84, 83, 83);
+  padding-left: 0;
+}
+.box > .message-box > .right > .bottom > span {
+  text-wrap: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.box > .text {
+  width: 100vw;
+  padding: 0 10px;
+  margin: 10px 0;
+}
+.box > .text > .text-box {
+  width: 100%;
+  height: auto;
+}
+.box > .img {
+  width: 100vw;
+  padding: 0 10px;
+  margin-bottom: 10px;
+}
+.box > .img > .img-box {
+  width: 100%;
+}
+.box > .img > .img-box > img {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+  margin-top: 5px;
+  margin-right: 5px;
+  border-radius: 10px;
+}
+.box > .function {
+  width: 100%;
+  display: flex;
+  padding: 0 10px;
+  align-items: center;
+}
+.box > .connect > .method > button {
+  font-size: 14px;
+  border: none;
+  background-color: var(--main-color);
+  border-radius: 10px;
+  padding: 2px 5px;
+}
+.box > .function > div {
+  margin-right: 10px;
+  display: flex;
+  align-items: center;
+}
+.box > .function > div > span {
+  font-size: 12px;
+}

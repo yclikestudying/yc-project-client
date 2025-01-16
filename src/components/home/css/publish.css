@@ -1,0 +1,84 @@
+.all {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* 整个内容的设置 */
+.publish {
+  width: 100vw;
+  height: calc(100vh - 40px);
+  padding: 0 10px;
+}
+
+/* 功能整体的设置 */
+.publish-content {
+  width: 100%;
+}
+
+/* 每个功能的设置 */
+.publish-content > .item {
+  width: 100%;
+  height: 50px;
+  display: flex;
+  background-color: rgb(240, 240, 240);
+  border-radius: 10px;
+  padding: 2px;
+  margin-top: 10px;
+}
+.publish-content > .item > .left {
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.publish-content > .item > .left > img {
+  width: 80%;
+  height: 80%;
+}
+.publish-content > .item > .right {
+  width: calc(100% - 50px - 20px);
+  height: 50px;
+  padding-left: 5px;
+}
+.publish-content > .item > .icon {
+  width: 20px;
+  height: 100%;
+}
+.publish-content > .item > .icon > img {
+  width: 100%;
+  height: 100%;
+}
+.publish-content > .item > .right > .top {
+  width: 100%;
+  height: 50%;
+  display: flex;
+  align-items: center;
+}
+.publish-content > .item > .right > .bottom {
+  width: 100%;
+  height: 50%;
+  display: flex;
+  align-items: center;
+}
+.publish-content > .item > .right > .bottom > span {
+  font-size: 14px;
+  color: rgb(136, 136, 136);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* 具体发布的内容的整体设置 */
+.content {
+    position: absolute;
+    top: 0;
+    left: 100vw;
+    width: 100vw;
+    height: 100vh;
+    background-color: #fff;
+    transition: all .2s;
+    z-index: 999;
+}

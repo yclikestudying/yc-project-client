@@ -66,5 +66,4 @@ const array = ref([
 ]);
 </script>
 
-<style src="/src/components/css/common.css" />
-<style src="./css/customerService.css" />
+<style src="./css/customerService.css" scoped/>

@@ -34,9 +34,11 @@
     </div>
 
     <div class="tag">
-      <template v-for="index in 20">
+      <template v-for="(item, index) in JSON.parse(myStore.userInfo.userTags)">
         <div class="tag-item">
-          <van-tag class="van-tag" type="primary" size="large">标签{{ index }}</van-tag>
+          <van-tag class="van-tag" type="primary" size="large">{{
+            item
+          }}</van-tag>
         </div>
       </template>
     </div>
@@ -46,16 +48,15 @@
 <script setup>
 import { ref } from "vue";
 import router from "@/router";
+import useMyStore from "@/store/useMyStore";
+
+// 状态管理
+const myStore = useMyStore();
 
 // 返回上一页
 const onClickLeft = () => {
   router.back();
 };
-
-// 资料信息
-const data = ref({
-  username: "杨闯",
-});
 
 // 编写资料内容数组
 const data_array = ref([
@@ -64,19 +65,24 @@ const data_array = ref([
     content: [
       {
         name: "用户名",
-        data: "coderyc",
+        data: myStore.userInfo.userName,
       },
       {
         name: "性别",
-        data: "男",
+        data:
+          myStore.userInfo.userGender === Number(1)
+            ? "男"
+            : myStore.userInfo.userGender === Number(0)
+            ? "女"
+            : "暂无",
       },
       {
         name: "生日",
-        data: "",
+        data: myStore.userInfo.userBirthday,
       },
       {
         name: "简介",
-        data: "",
+        data: myStore.userInfo.userProfile,
       },
     ],
   },
@@ -85,11 +91,11 @@ const data_array = ref([
     content: [
       {
         name: "所在地",
-        data: "",
+        data: myStore.userInfo.userLocation,
       },
       {
         name: "家乡",
-        data: "",
+        data: myStore.userInfo.userHometown,
       },
     ],
   },
@@ -98,7 +104,7 @@ const data_array = ref([
     content: [
       {
         name: "专业",
-        data: "",
+        data: myStore.userInfo.userProfession,
       },
     ],
   },
@@ -107,7 +113,6 @@ const data_array = ref([
     content: [
       {
         name: "标签编辑",
-        data: "",
       },
     ],
   },
@@ -116,13 +121,12 @@ const data_array = ref([
 // 去到具体的编辑资料页面
 const goToEditInfoItem = (name) => {
   router.push({
-    path: '/editInfoItem',
+    path: "/editInfoItem",
     query: {
-      title: name
-    }
-  })
-}
-
+      title: name,
+    },
+  });
+};
 </script>
 
 <style scoped>
@@ -146,7 +150,7 @@ const goToEditInfoItem = (name) => {
   height: 30px;
   display: flex;
   align-items: center;
-  background-color: #F2F3F8;
+  background-color: #f2f3f8;
 }
 
 .editInfo > .data > .part > span {

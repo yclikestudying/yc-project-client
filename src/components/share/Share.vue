@@ -12,28 +12,154 @@
         </template>
       </div>
     </div>
-    <div class="search">
-      <van-search v-model="searchContent" placeholder="请输入搜索关键词" />
+    <div class="search" @click="goToSearch">
+      <van-search placeholder="点击搜索" />
     </div>
     <div class="bottom">
-      <van-pull-refresh v-model="loading" @refresh="onRefresh">
+      <van-pull-refresh
+        class="refresh"
+        v-model="loading"
+        @refresh="onRefresh"
+        :disabled="isDisabledOne"
+      >
         <div class="page">
-          <span>关注</span>
+          <template v-for="item in 3">
+            <div class="box">
+              <div class="message-box" @click="goToChat">
+                <div class="left">
+                  <div class="img">
+                    <img src="/public/mine/默认头像.jpg" alt="" />
+                  </div>
+                </div>
+                <div class="right">
+                  <div class="top">
+                    <span>名称</span>
+                    <button>关注</button>
+                  </div>
+                  <div class="bottom">
+                    <span>2024/12/16</span>
+                  </div>
+                </div>
+              </div>
+              <div class="text">
+                <div class="text-box">
+                  <span
+                    >有人有好看的头像吗有人有好看的头像吗有人有好看的头像吗有人有好看的头像吗有人有好看的头像吗</span
+                  >
+                </div>
+              </div>
+              <div class="img">
+                <div class="img-box">
+                  <img src="/public/mine/默认头像.jpg" alt="" />
+                  <img src="/public/mine/默认头像.jpg" alt="" />
+                  <img src="/public/mine/默认头像.jpg" alt="" />
+                  <img src="/public/mine/默认头像.jpg" alt="" />
+                </div>
+              </div>
+              <div class="function">
+                <div>
+                  <van-icon name="good-job-o" />
+                  <span>10</span>
+                </div>
+                <div>
+                  <van-icon name="chat-o" />
+                  <span>10</span>
+                </div>
+                <div>
+                  <van-icon name="eye-o" />
+                  <span>140</span>
+                </div>
+              </div>
+            </div>
+          </template>
         </div>
       </van-pull-refresh>
-      <van-pull-refresh v-model="loading1" @refresh="onRefresh1">
+      <van-pull-refresh
+        class="refresh"
+        v-model="loading1"
+        @refresh="onRefresh1"
+        :disabled="isDisabledTwo"
+      >
         <div class="page">
-          <span>推荐</span>
+          <template v-for="item in 3">
+            <div class="box">
+              <div class="message-box" @click="goToChat">
+                <div class="left">
+                  <div class="img">
+                    <img src="/public/mine/默认头像.jpg" alt="" />
+                  </div>
+                </div>
+                <div class="right">
+                  <div class="top">
+                    <span>名称</span>
+                    <button>关注</button>
+                  </div>
+                  <div class="bottom">
+                    <span>2024/12/16</span>
+                  </div>
+                </div>
+              </div>
+              <div class="text">
+                <div class="text-box">
+                  <span
+                    >有人有好看的头像吗有人有好看的头像吗有人有好看的头像吗有人有好看的头像吗有人有好看的头像吗</span
+                  >
+                </div>
+              </div>
+              <div class="img">
+                <div class="img-box">
+                  <img src="/public/mine/默认头像.jpg" alt="" />
+                  <img src="/public/mine/默认头像.jpg" alt="" />
+                  <img src="/public/mine/默认头像.jpg" alt="" />
+                  <img src="/public/mine/默认头像.jpg" alt="" />
+                </div>
+              </div>
+              <div class="function">
+                <div>
+                  <van-icon name="good-job-o" />
+                  <span>10</span>
+                </div>
+                <div>
+                  <van-icon name="chat-o" />
+                  <span>10</span>
+                </div>
+                <div>
+                  <van-icon name="eye-o" />
+                  <span>140</span>
+                </div>
+              </div>
+            </div>
+          </template>
         </div>
       </van-pull-refresh>
     </div>
+    <div class="publish">
+      <Publish @cancel="cancelPublish"></Publish>
+    </div>
+  </div>
+  <div class="bubble">
+    <van-floating-bubble
+      style="--van-floating-bubble-background: var(--main-color)"
+      v-model:offset="offset"
+      icon="plus"
+      axis="lock"
+      @click="publish"
+    />
   </div>
 </template>
 
 <script setup>
 import { onMounted, ref, watch } from "vue";
 import { showToast } from "vant";
-import { dataInit, touchstart, touchmove, touchend, pageIndex } from "@/utils/sliding";
+import {
+  dataInit,
+  touchstart,
+  touchmove,
+  touchend,
+  pageIndex,
+} from "@/utils/sliding";
+import Publish from "./Publish.vue";
+import router from "@/router";
 
 const loading = ref(false);
 const onRefresh = () => {
@@ -59,20 +185,51 @@ let bottomEl = null;
 let pageEl = null;
 let boxWidth = 0;
 let pageWidth = 0;
+let offset = ref({});
+let publishEl = null;
+// 内容的dom元素
+let pageEls = null;
+// 刷新组件的dom元素
+let refreshes = null;
+// 刷新是否禁用
+let isDisabledOne = ref(false);
+let isDisabledTwo = ref(false);
 onMounted(() => {
   // 获取DOM节点
   itemEl = document.querySelector(".item");
   boxWidth = itemEl.offsetWidth;
   underlineEl = document.querySelector(".underline");
   pageEl = document.querySelector(".page");
+  pageEls = document.querySelectorAll(".page");
+  refreshes = document.querySelectorAll(".refresh");
+  pageEls.forEach((item) => {
+    item.addEventListener("scroll", scrollY);
+  });
   pageWidth = pageEl.offsetWidth;
   bottomEl = document.querySelector(".bottom");
+  publishEl = document.querySelector(".publish");
   // 数据初始化
-  dataInit(currentTabIndex.value, pageWidth, bottomEl, tabs.value.length - 1)
-  bottomEl.addEventListener('touchstart', touchstart)
-  bottomEl.addEventListener('touchmove', touchmove)
-  bottomEl.addEventListener('touchend', touchend)
+  dataInit(currentTabIndex.value, pageWidth, bottomEl, tabs.value.length - 1);
+  bottomEl.addEventListener("touchstart", touchstart);
+  bottomEl.addEventListener("touchmove", touchmove);
+  bottomEl.addEventListener("touchend", touchend);
+  // 悬浮气泡
+  offset.value = { x: pageWidth * 0.8, y: pageEl.offsetHeight * 1.05 };
 });
+
+// 滚动监听
+const scrollY = () => {
+  if (pageEls[0].scrollTop === 0) {
+    isDisabledOne.value = false;
+  } else {
+    isDisabledOne.value = true;
+  }
+  if (pageEls[1].scrollTop === 0) {
+    isDisabledTwo.value = false;
+  } else {
+    isDisabledTwo.value = true;
+  }
+};
 
 // 默认列表
 let tabs = ref(["关注", "推荐"]);
@@ -99,11 +256,25 @@ watch(currentTabIndex, (value) => {
 });
 
 watch(pageIndex, (value) => {
-  currentTabIndex.value = value
-})
+  currentTabIndex.value = value;
+});
 
-// 搜索内容
-let searchContent = ref("");
+// 发表动态
+const publish = () => {
+  publishEl.style.transform = `translateY(-93vh)`;
+};
+
+// 取消发布
+const cancelPublish = (flag) => {
+  if (flag) {
+    publishEl.style.transform = `translateY(0)`;
+  }
+};
+
+// 去到搜索页面
+const goToSearch = () => {
+  router.push('/search')
+}
 </script>
 
 <style src="./css/share.css" scoped></style>

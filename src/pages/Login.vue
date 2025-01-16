@@ -5,7 +5,7 @@
       <div class="circle circle1"></div>
       <div class="circle circle2"></div>
     </div>
-    
+
     <!-- 添加一个滚动容器 -->
     <div class="scroll-container">
       <div class="content">
@@ -133,15 +133,19 @@
 </template>
 
 <script setup>
-// 脚本部分基本保持不变，只需修改一些提示文案
 import { ref, reactive } from "vue";
 import router from "@/router";
 import { showToast } from "vant";
+import request from "@/axios";
+import useGlobalStore from "@/store";
+import useMyStore from "@/store/useMyStore";
 
 // 状态管理
 const isLoginMode = ref(true);
 const loading = ref(false);
 const showPassword = ref(false);
+const globalStore = useGlobalStore();
+const myStore = useMyStore();
 
 // 表单数据
 const formData = reactive({
@@ -210,22 +214,43 @@ const handleSubmit = async () => {
   loading.value = true;
 
   try {
-    // 模拟API请求
-    await new Promise((resolve) => setTimeout(resolve, 1500));
-
-    showToast(isLoginMode.value ? "登录成功" : "注册成功", "success");
-
     if (!isLoginMode.value) {
-      isLoginMode.value = true;
+      await request
+        .post("/user/phoneRegister", formData)
+        .then((res) => {
+          if (res.code === 200) {
+            isLoginMode.value = true;
+            showToast("注册成功");
+          } else {
+            console.log(res);
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    } else {
+      await request
+        .post("/user/phoneLogin", formData)
+        .then(async (res) => {
+          if (res.code === 200) {
+            globalStore.token = res.data; // 存储token
+            await request
+              .get("/userInfo/getUserInfo")
+              .then((res) => {
+                myStore.userInfo = res.data;
+                router.push("/index");
+              })
+              .catch((err) => {
+                console.log(err);
+              });
+          } else {
+            console.log(res);
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     }
-
-    // 清空表单
-    formData.phone = "";
-    formData.password = "";
-    formData.confirmPassword = "";
-
-    // 登录成功到主页
-    router.push("/index");
   } catch (error) {
     showToast("操作失败，请重试", "error");
   } finally {
@@ -233,12 +258,12 @@ const handleSubmit = async () => {
   }
 };
 
-// 社交登录处理
+// 其他登录处理
 const handleSocialLogin = (platform) => {
   if (platform === "wechat") {
     showToast("正在使用微信登录...");
   } else {
-    showToast("正在使用校园卡��录...");
+    showToast("正在使用校园卡登录...");
   }
 };
 </script>

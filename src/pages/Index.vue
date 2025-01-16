@@ -58,9 +58,14 @@ const setCurrentIndex = (index, path) => {
 </script>
 
 <style scoped>
+.index {
+  width: 100vw;
+  height: 100vh;
+}
+
 .content {
   width: 100%;
-  height: 616px;
+  height: calc(100vh - 50px);
   overflow-x: hidden;
   overflow-y: scroll;
 }

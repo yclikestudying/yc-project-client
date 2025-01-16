@@ -153,12 +153,15 @@
 }
 
 /* 保存按钮 */
-.editInfoItem > .submit {
+.submit {
   margin-top: 10px;
   text-align: center;
 }
-.editInfoItem > .submit > .button {
+.submit > .button {
+  width: 100px;
+  margin-top: 10px;
   background-color: var(--main-color);
   color: var(--text-color);
   border: none;
+  color: white;
 }

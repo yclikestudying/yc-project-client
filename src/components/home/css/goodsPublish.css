@@ -1,0 +1,20 @@
+.content > .baseInfo {
+    margin-top: 10px;
+}
+
+.content > .baseInfo > .baseInfoContent {
+    border: 1px solid rgb(208, 208, 208);
+    width: 100%;
+    border-radius: 10px;
+    padding: 5px 0;
+}
+
+.content > .baseInfo > .baseInfoContent > .price {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 5px;
+}
+.content > .baseInfo > .baseInfoContent > .price > .right > span {
+    color: orangered;
+}

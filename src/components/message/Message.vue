@@ -18,10 +18,40 @@
     </div>
     <div class="bottom">
       <div class="page">
-        <span>互关私信</span>
+        <div class="message-box" @click="goToChat">
+          <div class="left">
+            <div class="img">
+              <img src="/public/mine/默认头像.jpg" alt="" />
+            </div>
+          </div>
+          <div class="right">
+            <div class="top">
+              <span>名称</span>
+              <span>2024/12/16</span>
+            </div>
+            <div class="bottom">
+              <span>最后一条消息</span>
+            </div>
+          </div>
+        </div>
       </div>
       <div class="page">
-        <span>粉丝来信</span>
+        <div class="message-box">
+          <div class="left">
+            <div class="img">
+              <img src="/public/mine/默认头像.jpg" alt="" />
+            </div>
+          </div>
+          <div class="right">
+            <div class="top">
+              <span>名称</span>
+              <span>2024/12/16</span>
+            </div>
+            <div class="bottom">
+              <span>你好啊，我是你的粉丝</span>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -29,7 +59,14 @@
 
 <script setup>
 import { onMounted, ref, watch } from "vue";
-import { dataInit, touchstart, touchmove, touchend, pageIndex } from "@/utils/sliding";
+import {
+  dataInit,
+  touchstart,
+  touchmove,
+  touchend,
+  pageIndex,
+} from "@/utils/sliding";
+import router from "@/router";
 // 选择菜单
 let tabs = ref(["互关私信", "粉丝来信"]);
 // 当前tab的索引
@@ -56,13 +93,12 @@ onMounted(() => {
   pageWidth = pageEl.offsetWidth;
 
   // 触摸事件数据初始化
-  dataInit(currentTabIndex.value, pageWidth, bottomEl, tabs.value.length - 1)
+  dataInit(currentTabIndex.value, pageWidth, bottomEl, tabs.value.length - 1);
   // 监听触摸事件
   bottomEl.addEventListener("touchstart", touchstart);
   bottomEl.addEventListener("touchmove", touchmove);
   bottomEl.addEventListener("touchend", touchend);
 });
-
 
 // 设置新的索引
 const setCurrentTabIndex = (index) => {
@@ -75,8 +111,9 @@ watch(currentTabIndex, (value) => {
 });
 // 对触摸监听中的pageIndex进行监听
 watch(pageIndex, (value) => {
-    currentTabIndex.value = value
-})
+  currentTabIndex.value = value;
+});
+
 </script>
 
 <style src="./css/message.css" scoped></style>

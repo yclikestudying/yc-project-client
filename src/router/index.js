@@ -4,16 +4,16 @@ const router = createRouter({
   history: createWebHistory(),
   routes: [
     {
-      path: '/',
-      redirect: '/login'
+      path: "/",
+      redirect: "/login",
     },
     {
-      path: '/login',
-      name: 'login',
-      component: () => import('@/pages/Login.vue'),
+      path: "/login",
+      name: "login",
+      component: () => import("@/pages/Login.vue"),
       meta: {
-        title: '登录'
-      }
+        title: "登录",
+      },
     },
     {
       path: "/index",
@@ -123,20 +123,33 @@ const router = createRouter({
       },
     },
     {
-      path: "/chat",
-      name: "chat",
-      component: () => import("@/components/message/Chat.vue"),
-      meta: {
-        title: "聊天",
-      },
-    },
-    {
       path: "/login",
       name: "login",
       component: () => import("@/pages/Login.vue"),
       meta: {
         title: "登录",
       },
+    },
+    {
+      path: "/publish",
+      name: "publish",
+      component: () => import("@/components/home/Publish.vue"),
+      meta: {
+        title: "home-发表",
+      },
+    },
+    {
+      path: "/search",
+      name: "search",
+      component: () => import("@/components/common/Search.vue"),
+      meta: {
+        title: "搜索页面",
+      },
+    },
+    {
+      path: "/temp",
+      name: "temp",
+      component: () => import("@/components/common/Chat.vue"),
     },
   ],
 });

@@ -1,0 +1,10 @@
+.chat {
+  width: 100vw;
+  height: 100vh;
+}
+.chat-content {
+  border: 1px solid black;
+  width: 100vw;
+  height: calc(100vh - 46px);
+}
+

@@ -11,7 +11,6 @@ app.use(router);
 
 // 引入 vant 样式
 import "/node_modules/vant/lib/index.css";
-
 // 引入 vant 相关组件
 import {
   Tab,
@@ -33,7 +32,10 @@ import {
   FloatingBubble,
   ActionSheet,
   Icon,
-  PullRefresh 
+  PullRefresh,
+  Uploader,
+  NumberKeyboard,
+  Dialog,
 } from "vant";
 app.use(Tab);
 app.use(Tabs);
@@ -55,5 +57,15 @@ app.use(FloatingBubble);
 app.use(ActionSheet);
 app.use(Icon);
 app.use(PullRefresh)
+app.use(Uploader)
+app.use(NumberKeyboard)
+app.use(Dialog)
+
+// 引入持久化插件
+import { createPinia } from "pinia";
+import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
+const pinia = createPinia()
+pinia.use(piniaPluginPersistedstate)
+app.use(pinia)
 
 app.mount("#app");

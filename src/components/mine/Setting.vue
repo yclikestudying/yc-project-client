@@ -79,8 +79,7 @@ const array = ref([
 ]);
 </script>
 
-<style src="/src/components/css/common.css" />
-<style src="./css/setting.css" />
+<style src="./css/setting.css" scoped/>
 <style scope>
 .main > .gap > .content {
   box-sizing: border-box;

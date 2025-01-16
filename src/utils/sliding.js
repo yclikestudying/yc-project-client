@@ -24,8 +24,15 @@ let boxEl = null;
 // 当前页面长度
 let length = 0;
 
+/**
+ * 如果有加载下过的话
+ * 需要额外配置这几个变量进行控制
+ */
+// 下滑的起点
 let startY = 0;
+// 下滑的终点
 let endY = 0;
+// 下滑的距离
 let distanceY = 0;
 
 // 数据初始化

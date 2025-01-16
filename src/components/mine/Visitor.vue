@@ -27,5 +27,3 @@ const onClickLeft = () => {
     router.back()
 }
 </script>
-
-<style src="/src/components/css/common.css" />

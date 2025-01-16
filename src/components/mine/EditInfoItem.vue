@@ -15,28 +15,39 @@
     <!-- 用户名 -->
     <div class="content" v-if="title === '用户名'">
       <div class="text">
-        <input class="input" type="text" placeholder="请输入新的用户名" />
+        <input
+          class="input"
+          type="text"
+          placeholder="请输入新的用户名"
+          v-model="userInfo.userName"
+        />
       </div>
       <div class="prompt">
         <span>2-15个字符，支持中英文、数字、-或_，1天内修改1次</span>
+      </div>
+      <!-- 保存 -->
+      <div class="submit" @click="submit('userName')">
+        <van-button class="button" type="primary">保存</van-button>
       </div>
     </div>
 
     <!-- 性别 -->
     <div class="content" v-if="title === '性别'">
       <div class="gender">
-        <van-radio-group v-model="checked">
+        <van-radio-group v-model="userInfo.userGender">
           <div class="gender-item"><van-radio name="1">男</van-radio></div>
-          <div class="gender-item"><van-radio name="2">女</van-radio></div>
+          <div class="gender-item"><van-radio name="0">女</van-radio></div>
         </van-radio-group>
+      </div>
+      <!-- 保存 -->
+      <div class="submit" @click="submit('userGender')">
+        <van-button class="button" type="primary">保存</van-button>
       </div>
     </div>
 
     <!-- 生日 -->
     <div class="content" v-if="title === '生日'">
-      <div class="show">
-        日期: {{ currentDate[0] + "-" + currentDate[1] + "-" + currentDate[2] }}
-      </div>
+      <div class="show">日期: {{ userInfo.userBirthday || "暂无" }}</div>
       <div class="birthday">
         <van-date-picker
           v-model="currentDate"
@@ -46,17 +57,26 @@
           :show-toolbar="showToolbar"
         />
       </div>
+      <!-- 保存 -->
+      <div class="submit" @click="submit('userBirthday')">
+        <van-button class="button" type="primary">保存</van-button>
+      </div>
     </div>
 
     <!-- 简介 -->
     <div class="content" v-if="title === '简介'">
       <div class="profile">
         <textarea
+          v-model="userInfo.userProfile"
           class="textarea"
           cols="38"
           rows="10"
           placeholder="把你的职业、爱好、座右铭写上"
         ></textarea>
+      </div>
+      <!-- 保存 -->
+      <div class="submit" @click="submit('userProfile')">
+        <van-button class="button" type="primary">保存</van-button>
       </div>
     </div>
 
@@ -65,7 +85,6 @@
       <div>
         <van-field
           v-model="fieldValue"
-          is-link
           readonly
           label="地区"
           placeholder="请选择所在地区"
@@ -77,6 +96,10 @@
           active-color="var(--main-color)"
           @finish="onFinish"
         />
+      </div>
+      <!-- 保存 -->
+      <div class="submit" @click="submit('userLocation')">
+        <van-button class="button" type="primary">保存</van-button>
       </div>
     </div>
 
@@ -84,19 +107,22 @@
     <div class="content" v-if="title === '家乡'">
       <div>
         <van-field
-          v-model="fieldValue"
-          is-link
+          v-model="fieldValue1"
           readonly
           label="地区"
-          placeholder="请选择所在地区"
+          placeholder="请选择你的家乡"
         />
         <van-cascader
-          v-model="cascaderValue"
-          title="请选择所在地区"
+          v-model="cascaderValue1"
+          title="请选择你的家乡"
           :options="options"
           active-color="var(--main-color)"
-          @finish="onFinish"
+          @finish="onFinish1"
         />
+      </div>
+      <!-- 保存 -->
+      <div class="submit" @click="submit('userHomeTown')">
+        <van-button class="button" type="primary">保存</van-button>
       </div>
     </div>
 
@@ -104,8 +130,7 @@
     <div class="content" v-if="title === '专业'">
       <div>
         <van-field
-          v-model="professional"
-          is-link
+          v-model="userInfo.userProfession"
           readonly
           label="专业"
           placeholder="请选择你的专业"
@@ -141,6 +166,10 @@
           </van-sidebar>
         </div>
       </div>
+      <!-- 保存 -->
+      <div class="submit" @click="submit('userProfession')">
+        <van-button class="button" type="primary">保存</van-button>
+      </div>
     </div>
 
     <!-- 个性标签 -->
@@ -165,15 +194,11 @@
       <div class="main">
         <div class="professional">
           <van-sidebar v-model="activeIndex" class="van-sidebar">
-            <template
-              v-for="(item, itemIndex) in professionalItem"
-              :key="itemIndex"
-            >
+            <template v-for="(item, itemIndex) in tags" :key="itemIndex">
               <van-sidebar-item :title="item.name" />
               <div class="professional-item">
                 <template
-                  v-for="(name, nameIndex) in professionalItem[activeIndex]
-                    .data"
+                  v-for="(name, nameIndex) in tags[activeIndex].data"
                   :key="nameIndex"
                 >
                   <van-tag
@@ -192,26 +217,38 @@
           </van-sidebar>
         </div>
       </div>
-    </div>
-
-    <!-- 保存 -->
-    <div class="submit">
-      <van-button
-        class="button"
-        style="width: 100px; margin-top: 10px"
-        type="primary"
-        >保存</van-button
-      >
+      <!-- 保存 -->
+      <div class="submit" @click="submit('userTags')">
+        <van-button class="button" type="primary">保存</van-button>
+      </div>
     </div>
   </div>
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { reactive, ref } from "vue";
 import { useRoute } from "vue-router";
 import router from "@/router";
 import { useCascaderAreaData } from "@vant/area-data";
 import { showToast } from "vant";
+import request from "@/axios";
+import useMyStore from "@/store/useMyStore";
+import { ConsoleSqlOutlined } from "@ant-design/icons-vue";
+
+// 状态管理
+const myStore = useMyStore();
+
+// 用户信息
+let userInfo = reactive({
+  userName: myStore.userInfo.userName,
+  userGender: String(myStore.userInfo.userGender),
+  userBirthday: myStore.userInfo.userBirthday,
+  userProfile: myStore.userInfo.userProfile,
+  userLocation: myStore.userInfo.userLocation,
+  userHomeTown: myStore.userInfo.userHometown,
+  userProfession: myStore.userInfo.userProfession,
+  userTags: myStore.userInfo.userTags,
+});
 
 // 获取上一页面传递的标题名
 const route = useRoute();
@@ -222,9 +259,6 @@ const onClickLeft = () => {
   router.back();
 };
 
-// 性别
-const checked = ref("1");
-
 // 日期选择是否显示顶部栏
 const showToolbar = ref(false);
 
@@ -234,22 +268,26 @@ const currentDate = ref(["2024", "01", "01"]);
 const minDate = new Date(1949, 10, 1);
 const maxDate = new Date(2024, 11, 31);
 
-// 地区选择
-const show = ref(false);
-const fieldValue = ref("");
+// 所在地
+const fieldValue = ref(userInfo.userLocation);
 const cascaderValue = ref("");
+// 家乡
+const fieldValue1 = ref(userInfo.userHomeTown);
+const cascaderValue1 = ref("");
 // 选项列表，children 代表子选项，支持多级嵌套
 const options = useCascaderAreaData();
 // 全部选项选择完毕后，会触发 finish 事件
 const onFinish = ({ selectedOptions }) => {
   fieldValue.value = selectedOptions.map((option) => option.text).join("-");
 };
+const onFinish1 = ({ selectedOptions }) => {
+  fieldValue1.value = selectedOptions.map((option) => option.text).join("-");
+};
 
 // 专业
-const professional = ref("");
 const activeIndex = ref(0);
 const currentProfessionalName = ref("");
-// 专业数组
+// 专业
 const professionalItem = ref([
   {
     name: "工科",
@@ -260,18 +298,28 @@ const professionalItem = ref([
     data: ["专业3", "专业4"],
   },
 ]);
+// 标签
+const tags = ref([
+  {
+    name: "运动",
+    data: ["跑步", "游泳"],
+  },
+  {
+    name: "学习",
+    data: ["阅读名著", "古诗宋词"],
+  },
+]);
 // 设置 currentIndex
 const setCurrentIndex = (name) => {
   currentProfessionalName.value = name;
-  professional.value =
+  userInfo.userProfession =
     professionalItem.value[activeIndex.value].name +
     "-" +
     currentProfessionalName.value;
 };
 
 // 个性标签
-
-let tag_array = ref([]);
+let tag_array = ref(JSON.parse(myStore.userInfo.userTags) || []);
 const max_tag_numbers = ref(3);
 const saveName = (name) => {
   // 数组中存在就删除
@@ -301,7 +349,45 @@ const deleteTag = (name) => {
     return;
   }
 };
+
+// 修改信息
+const submit = async (name) => {
+  if (name === "userBirthday") {
+    userInfo.userBirthday =
+      currentDate.value[0] +
+      "-" +
+      currentDate.value[1] +
+      "-" +
+      currentDate.value[2];
+  }
+  if (name === "userLocation") {
+    userInfo.userLocation = fieldValue.value;
+  }
+  if (name === "userHomeTown") {
+    userInfo.userHomeTown = fieldValue1.value;
+  }
+  if (name === "userTags") {
+    userInfo.userTags = JSON.stringify(tag_array.value);
+  }
+  let nameValue = userInfo[`${name}`];
+  if (name === "userGender") {
+    nameValue = Number(nameValue)
+  }
+  await request
+    .put("/userInfo/updateUserInfo", {
+      key: name,
+      value: nameValue,
+    })
+    .then((res) => {
+      if (res.code === 200) {
+        myStore.userInfo[`${name}`] = nameValue;
+        showToast("修改成功");
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
 </script>
 
-<style src="./css/editInfoItem.css" />
-<style src="/src/components/css/common.css" />
+<style src="./css/editInfoItem.css" scoped />

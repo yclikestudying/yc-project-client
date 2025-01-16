@@ -114,5 +114,4 @@ const data_array = ref([
 ]);
 </script>
 
-<style src="/src/components/css/common.css" />
-<style src="./css/privacy.css" />
+<style src="./css/privacy.css" scoped/>
